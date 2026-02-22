@@ -24,4 +24,15 @@ public class StudentService {
         students.removeIf(s -> s.getId() == id);
         return "Student Deleted";
     }
+
+    public String updateStudent(int id,Student updatedStudent){
+        for(Student student: students){
+            if(student.getId() == id){
+                student.setName(updatedStudent.getName());
+                student.setAge(updatedStudent.getAge());
+                return "Student " + id + " updated";
+            }
+        }
+        return "Student "+ id+" not found";
+    }
 }
