@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
-@Service
+@Service    //marks the business logic component it creats and manages the objects automatically
 public class StudentService {
 
-    @Autowired
-    private StudentRepository repository;
+    @Autowired         //springBoot automatically injects the objects(Dependency Injection)
+    private StudentRepository repository;  // inject StudentRespository into Service
 
     public List<Student> getStudents() {
         return repository.findAll();
@@ -34,7 +34,7 @@ public class StudentService {
         student.setName(updatedStudent.getName());
         student.setAge(updatedStudent.getAge());
 
-        repository.save(student);
+        repository.save(student);   //save after updating
         return "Student Updated";
     }
 }

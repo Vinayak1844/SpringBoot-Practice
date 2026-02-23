@@ -22,7 +22,7 @@ public class Student {
         this.age = age;
     }
 
-//    public void setId(int id) {this.id = id;}
+//    public void setId(int id) {this.id = id;}   // no need to set the age manually.
 
     public int getId(){return id;}
 

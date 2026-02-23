@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/student")
+@RestController     //marks class as web controller,handles http requests and returns response directly
+@RequestMapping("/student")        //Base url for all the endpoints
 public class StudentController {
 
-    @Autowired
+    @Autowired  //Dependency Injection  inject StudentService into controller
     public StudentService studentservice;
 
-    @GetMapping
+    @GetMapping     //maps url
     public List<Student> getAllStudents(){
         return studentservice.getStudents();
     }
@@ -23,9 +23,10 @@ public class StudentController {
     public String addStudent(@RequestBody Student student){
         return studentservice.addStudent(student);
     }
+    //@RequestBody converts the JSON into java objects.
 
     @DeleteMapping("/{id}")
-    public String deleteStudent(@PathVariable int id){
+    public String deleteStudent(@PathVariable int id){  //@PathVariable extracts the values from the url
         return studentservice.deleteStudent(id);
     }
 
