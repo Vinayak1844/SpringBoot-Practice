@@ -17,7 +17,7 @@ public class Student {
 
     Student() {}
 
-    Student(int id,String name,int age){
+    Student(String name,int age){       //no need to give Id manually now
         this.name = name;
         this.age = age;
     }
