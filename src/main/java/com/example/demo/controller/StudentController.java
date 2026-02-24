@@ -2,7 +2,9 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Student;
 import com.example.demo.service.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +22,8 @@ public class StudentController {
     }
 
     @PostMapping
-    public String addStudent(@RequestBody Student student){
+    @ResponseStatus(HttpStatus.CREATED)
+    public String addStudent(@Valid @RequestBody Student student){
         return studentservice.addStudent(student);
     }
     //@RequestBody converts the JSON into java objects.

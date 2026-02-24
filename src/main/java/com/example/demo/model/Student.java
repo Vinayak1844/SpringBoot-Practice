@@ -4,6 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity   //this annotation means that create a table for this class.
 public class Student {
@@ -12,7 +15,11 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)    //auto increment id.
     private int id;
 
+    @NotBlank(message = "Name cannot be empty")
     private String name;
+
+    @Min(value = 1, message = "Age must be positive")
+    @Max(value = 120,message = "Age should be realistic")
     private int age;
 
     Student() {}
