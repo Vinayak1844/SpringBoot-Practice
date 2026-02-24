@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Student;
 import com.example.demo.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +28,8 @@ public class StudentService {
     }
 
     public String updateStudent(int id,Student updatedStudent){
-        Student student = repository.findById(id).orElse(null);
-
-        if(student == null) return "Student not found";
+        Student student = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Student not found"));
 
         student.setName(updatedStudent.getName());
         student.setAge(updatedStudent.getAge());
