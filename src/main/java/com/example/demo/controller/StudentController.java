@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.StudentDTO;
 import com.example.demo.model.Student;
 import com.example.demo.service.StudentService;
 import jakarta.validation.Valid;
@@ -23,8 +24,8 @@ public class StudentController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public String addStudent(@Valid @RequestBody Student student){
-        return studentservice.addStudent(student);
+    public StudentDTO addStudent(@Valid @RequestBody StudentDTO dto){
+        return studentservice.addStudent(dto);
     }
     //@RequestBody converts the JSON into java objects.
 

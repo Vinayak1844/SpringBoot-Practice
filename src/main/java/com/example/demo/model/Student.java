@@ -22,7 +22,7 @@ public class Student {
     @Max(value = 120,message = "Age should be realistic")
     private int age;
 
-    Student() {}
+    public Student() {}
 
     Student(String name,int age){       //no need to give Id manually now
         this.name = name;

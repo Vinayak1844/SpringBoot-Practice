@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.StudentDTO;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Student;
 import com.example.demo.repository.StudentRepository;
@@ -17,9 +18,17 @@ public class StudentService {
         return repository.findAll();
     }
 
-    public String addStudent(Student student){
-        repository.save(student);
-        return "Student Added";
+    public StudentDTO getStudents(int id) {
+        Student student = repository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("Student not found"));
+        return convertToDto(student);
+    }
+
+    public StudentDTO addStudent(StudentDTO dto){
+        Student student = convertToEntity(dto);
+        Student saved = repository.save(student);
+        return convertToDto(saved);
+
     }
 
     public String deleteStudent(int id){
@@ -36,5 +45,19 @@ public class StudentService {
 
         repository.save(student);   //save after updating
         return "Student Updated";
+    }
+
+    public Student convertToEntity(StudentDTO dto){
+        Student student = new Student();
+        student.setAge(dto.getAge());
+        student.setName(dto.getName());
+        return student;
+    }
+
+    public StudentDTO convertToDto(Student student){
+        StudentDTO dto = new StudentDTO();
+        dto.setAge(student.getAge());
+        dto.setName(student.getName());
+        return dto;
     }
 }
