@@ -1,12 +1,11 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+
+import java.util.List;
 
 @Entity   //this annotation means that create a table for this class.
 public class Student {
@@ -21,6 +20,9 @@ public class Student {
     @Min(value = 1, message = "Age must be positive")
     @Max(value = 120,message = "Age should be realistic")
     private int age;
+
+    @OneToMany(mappedBy = "student",cascade = CascadeType.ALL)
+    private List<Address> addresses;
 
     public Student() {}
 
@@ -40,4 +42,8 @@ public class Student {
     public void setAge(int age) {this.age = age;}
 
     public int getAge() {return age;}
+
+    public List<Address> getAddresses() {return addresses;}
+
+    public void setAddresses(List<Address> addresses) {this.addresses = addresses;}
 }
