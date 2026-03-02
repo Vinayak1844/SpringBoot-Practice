@@ -1,11 +1,15 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.AddressDTO;
 import com.example.demo.dto.StudentDTO;
 import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.model.Address;
 import com.example.demo.model.Student;
 import com.example.demo.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Service    //marks the business logic component it creats and manages the objects automatically
@@ -26,7 +30,11 @@ public class StudentService {
 
     public StudentDTO addStudent(StudentDTO dto){
         Student student = convertToEntity(dto);
+        if(student.getAddresses() != null){
+            student.getAddresses().forEach(address -> address.setStudent((student)));
+        }
         Student saved = repository.save(student);
+
         return convertToDto(saved);
 
     }
@@ -51,6 +59,22 @@ public class StudentService {
         Student student = new Student();
         student.setAge(dto.getAge());
         student.setName(dto.getName());
+
+        if(dto.getAddresses()!= null){
+            List<Address> addressList = new ArrayList<>();
+
+            for(AddressDTO addressdto: dto.getAddresses()){
+                Address address = new Address();
+                address.setCity(addressdto.getCity());
+
+                address.setStudent(student);
+
+                addressList.add(address);
+            }
+            student.setAddresses(addressList);
+        }
+
+
         return student;
     }
 
@@ -58,6 +82,18 @@ public class StudentService {
         StudentDTO dto = new StudentDTO();
         dto.setAge(student.getAge());
         dto.setName(student.getName());
+
+        if(student.getAddresses() != null){
+            List<AddressDTO> addressdtoList = new ArrayList<>();
+
+            for(Address address:student.getAddresses()){
+                AddressDTO addressDTO  = new AddressDTO();
+                addressDTO.setCity(addressDTO.getCity());
+                addressdtoList.add(addressDTO);
+            }
+            dto.setAddresses(addressdtoList);
+        }
+
         return dto;
     }
 }
