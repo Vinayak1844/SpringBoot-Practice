@@ -1,44 +1,63 @@
-# Student Management System (In Progress)
+# Student Management System - Spring Boot
 
-A backend REST API built using Spring Boot to manage student records using a clean layered architecture, DTO mapping, validation, and centralized exception handling.
+A backend REST API built using **Spring Boot** to manage student records.
+The project demonstrates clean **layered architecture**, **DTO-based API design**, **request validation**, and **centralized exception handling**.
 
 ---
 
 ## 🚀 Tech Stack
 
-- Java
-- Spring Boot
-- Spring Data JPA
-- MySQL
-- Maven
+* Java
+* Spring Boot
+* Spring Data JPA
+* MySQL
+* Maven
+
+---
+
+## 📌 Features
+
+* Create Student
+* Get Student by ID
+* Get All Students
+* Update Student
+* Delete Student
+* DTO ↔ Entity Mapping
+* Request Validation using `@Valid`
+* Centralized Exception Handling using `@ControllerAdvice`
+* Clean Layered Architecture (Controller → Service → Repository)
 
 ---
 
 ## 🏗️ Architecture
 
-This project follows a layered architecture:
+The application follows a **layered backend architecture** commonly used in enterprise Spring Boot applications.
 
 Controller → Service → Repository → Database
 
-- **Controller Layer** – Handles HTTP requests and responses  
-- **Service Layer** – Contains business logic  
-- **Repository Layer** – Interacts with MySQL using Spring Data JPA  
-- **DTO Layer** – Handles request and response data transfer  
-- **Global Exception Handling** – Implemented using `@ControllerAdvice`
+### Controller Layer
 
----
+Handles HTTP requests and exposes REST API endpoints.
 
-## 📌 Features Implemented
+### Service Layer
 
-- Create Student
-- Get Student by ID
-- Get All Students
-- Update Student
-- Delete Student
-- DTO ↔ Entity Mapping
-- Request Validation using `@Valid`
-- Centralized Exception Handling
-- Proper RESTful API Design
+Contains business logic and application processing.
+
+### Repository Layer
+
+Communicates with the database using **Spring Data JPA**.
+
+### DTO Layer
+
+Separates internal entities from API request/response objects.
+
+### Configuration Layer
+
+Contains configuration classes such as CORS setup or application-level settings.
+
+### Exception Handling
+
+Global exception handling implemented using `@ControllerAdvice`.
 
 ---
 
@@ -46,22 +65,32 @@ Controller → Service → Repository → Database
 
 ```
 src/main/java/com/example/studentmanagement
-│
-├── controller
-├── service
-├── repository
-├── entity
-├── dto
-├── exception
-└── mapper
+
+controller      → REST API endpoints
+service         → Business logic
+repository      → Database interaction
+entity          → JPA entities
+dto             → Request / Response models
+mapper          → DTO ↔ Entity mapping
+exception       → Global exception handling
+config          → Application configuration classes
 ```
 
 ---
 
 ## 📡 API Endpoints
 
-### ➤ Create Student  
-**POST** `/students`
+Base URL
+
+```
+http://localhost:8080/students
+```
+
+### Create Student
+
+POST `/students`
+
+Request Body
 
 ```json
 {
@@ -70,33 +99,29 @@ src/main/java/com/example/studentmanagement
 }
 ```
 
----
+### Get All Students
 
-### ➤ Get All Students  
-**GET** `/students`
+GET `/students`
 
----
+### Get Student by ID
 
-### ➤ Get Student by ID  
-**GET** `/students/{id}`
+GET `/students/{id}`
 
----
+### Update Student
 
-### ➤ Update Student  
-**PUT** `/students/{id}`
+PUT `/students/{id}`
 
----
+### Delete Student
 
-### ➤ Delete Student  
-**DELETE** `/students/{id}`
+DELETE `/students/{id}`
 
 ---
 
 ## 🗄️ Database Configuration
 
-Update your `application.properties`:
+Update `application.properties`
 
-```properties
+```
 spring.datasource.url=jdbc:mysql://localhost:3306/student_db
 spring.datasource.username=root
 spring.datasource.password=yourpassword
@@ -107,17 +132,27 @@ spring.jpa.show-sql=true
 
 ---
 
-## ▶️ How to Run
+## ▶️ Running the Application
 
-1. Clone the repository
-2. Configure MySQL in `application.properties`
-3. Run the application:
+Clone the repository
+
+```
+git clone https://github.com/Vinayak1844/SpringBoot-Practice
+```
+
+Navigate to the project directory
+
+```
+cd SpringBoot-Practice
+```
+
+Run the application
 
 ```
 mvn spring-boot:run
 ```
 
-Application runs at:
+Application starts at
 
 ```
 http://localhost:8080
@@ -127,25 +162,31 @@ http://localhost:8080
 
 ## 📈 Learning Outcomes
 
-- Implemented Dependency Injection and Inversion of Control
-- Built layered backend architecture
-- Applied DTO mapping for clean API design
-- Integrated MySQL using Spring Data JPA
-- Implemented centralized exception handling
+Through this project I practiced:
+
+* Spring Boot REST API development
+* Dependency Injection and Inversion of Control
+* Layered backend architecture
+* DTO-based API design
+* Spring Data JPA integration with MySQL
+* Global exception handling in REST APIs
 
 ---
 
-## 🛠️ Upcoming Improvements
+## 🔧 Future Improvements
 
-- JWT Authentication
-- Pagination & Sorting
-- One-to-Many Relationships
-- Swagger API Documentation
-- Deployment
+* JWT Authentication
+* Pagination & Sorting
+* One-to-Many Relationships
+* Swagger API Documentation
+* Docker Deployment
 
 ---
 
 ## 👨‍💻 Author
 
-Vinayak Vishwakarma  
+Vinayak Vishwakarma
 Backend Developer | Java | Spring Boot
+
+GitHub
+https://github.com/Vinayak1844
